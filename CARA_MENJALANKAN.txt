@@ -1,0 +1,88 @@
+========================================================================
+             PETUNJUK MENJALANKAN ISCS STOCK CONTROL ENGINE v2
+                        PT INDO DEWATA SEMESTA
+========================================================================
+
+Aplikasi ini 100% OFFLINE (dapat digunakan sepenuhnya tanpa internet).
+Sudah dilengkapi dengan script batch (.bat) otomatis mode produksi cepat
+sehingga aplikasi dapat menyala dalam 1-2 detik hanya dengan 1 kali klik!
+
+------------------------------------------------------------------------
+1. JAWABAN PERTANYAAN UMUM:
+------------------------------------------------------------------------
+
+Q: "APAKAH SAAT BUKA APLIKASI HARUS MENJALANKAN SERVER/FILE .BAT?
+    KENAPA TIDAK BISA LANGSUNG BUKA TANPA SERVER KARENA INI KHAN OFFLINE?"
+
+A: YA, file .bat harus dijalankan untuk menyalakan server lokal di latar belakang.
+   Berikut alasannya:
+   1. Keamanan Browser (CORS Sandbox):
+      Aplikasi modern menggunakan JavaScript React & TypeScript. Browser (Chrome/Edge)
+      secara standar MEMBLOKIR pembukaan langsung file .html via klik ganda (file:///...)
+      demi keamanan sistem komputer.
+   2. Penyimpanan Database Permanen:
+      Server lokal (Node.js Express) bertindak sebagai "mesin database lokal"
+      yang menyimpan data transaksi (Buying, Reclass, Shipping, Invoice) ke file fisik 
+      di hard disk komputer Anda (folder data/server_db.dat). Jika tanpa server lokal,
+      data Anda rentan terhapus saat membersihkan riwayat browser (cache/cookies).
+   3. 100% OFFLINE:
+      Server ini BUKAN server internet/cloud, melainkan server mini internal di dalam
+      laptop/PC Anda sendiri (http://localhost:3000), jadi tidak memerlukan kuota internet.
+
+Q: "KENAPA KEMARIN PROSES STARTUP SANGAT LAMA SEKALI?"
+A: - Kemarin file .bat menjalankan "npm run dev" (mode development), di mana komputer
+     harus mengompilasi ribuan modul kode program dari nol setiap kali dibuka (30-60 detik).
+   - SEKARANG SUDAH DIPERBAIKI! File .bat kini menjalankan "Mode Produksi Cepat" (dist)
+     yang sudah terkompilasi sebelumnya. Begitu di-klik ganda, aplikasi langsung terbuka 
+     di browser hanya dalam 1-2 DETIK saja!
+
+------------------------------------------------------------------------
+2. SYARAT AWAL (Cukup 1 Kali di Komputer Baru):
+------------------------------------------------------------------------
+Pastikan komputer Anda sudah terpasang Node.js (Versi LTS disarankan v18, v20, atau v22).
+Jika belum ada, unduh dan pasang secara gratis dari:
+👉 https://nodejs.org/
+
+------------------------------------------------------------------------
+3. CARA MENJALANKAN APLIKASI SEHARI-HARI:
+------------------------------------------------------------------------
+
+A. CARA STANDAR (Paling Mudah & Instan 1 Detik):
+   - Klik ganda (Double-Click) file:
+     👉 JALANKAN_APLIKASI.bat
+   - Browser akan otomatis terbuka ke http://localhost:3000 dalam 1-2 detik!
+   - Jendela Command Prompt yang terbuka cukup di-MINIMIZE ke taskbar (jangan ditutup).
+
+B. CARA MODE KIOSK (Layar Penuh Kasir + Auto-Print Dot Matrix):
+   - Klik ganda file:
+     👉 JALANKAN_KIOSK.bat
+   - Chrome terbuka layar penuh tanpa pop-up dialog print (langsung tembak ke printer).
+   - Tekan tombol Alt + F4 untuk keluar.
+
+------------------------------------------------------------------------
+4. TIPS: MEMBUAT SHORTCUT SEPERTI APLIKASI DESKTOP / AUTO-START:
+------------------------------------------------------------------------
+
+TIPS 1: PASANG SEBAGAI APLIKASI DESKTOP RESMI (PWA):
+1. Buka aplikasi di Google Chrome atau Microsoft Edge (http://localhost:3000).
+2. Di sebelah kanan address bar (kolom alamat website), klik ikon "Install App" / 
+   "Pasang Aplikasi ISCS" (ikon monitor kecil dengan panah ke bawah).
+3. Klik "Install / Pasang".
+4. Selesai! Icon aplikasi ISCS akan muncul di Desktop Windows Anda. Saat dibuka,
+   tampilannya bersih tanpa address bar atau tab browser, persis seperti aplikasi Windows asli!
+
+TIPS 2: MENJALANKAN OTOMATIS SAAT KOMPUTER / LAPTOP DINYALAKAN (AUTO-START):
+Jika Anda tidak ingin repot mengklik file .bat setiap pagi:
+1. Tekan tombol Windows + R di keyboard Anda.
+2. Ketik: shell:startup lalu tekan Enter.
+3. Folder "Startup" Windows akan terbuka.
+4. Buat Shortcut (Klik Kanan -> Create Shortcut) dari file JALANKAN_APLIKASI.bat
+   dan taruh di folder Startup tersebut.
+5. Mulai sekarang, setiap kali komputer dinyalakan, server ISCS otomatis berjalan di latar belakang!
+
+------------------------------------------------------------------------
+5. CARA MEMATIKAN APLIKASI:
+------------------------------------------------------------------------
+Buka jendela Command Prompt aplikasi, lalu tekan Ctrl + C atau langsung tutup (X)
+jendela Command Prompt saat jam kerja sudah selesai.
+========================================================================

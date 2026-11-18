@@ -1,0 +1,12 @@
+{
+	"appId": "com.indodewata.iscs",
+	"appName": "ISCS Engine",
+	"webDir": "dist",
+	"server": {
+		"androidScheme": "http",
+		"cleartext": true
+	},
+	"android": {
+		"allowMixedContent": true
+	}
+}

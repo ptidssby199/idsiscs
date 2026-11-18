@@ -1,0 +1,6 @@
+{
+  "name": "ISCS Stock Control & Warehouse",
+  "description": "Sistem Manajemen Timbang Buying, Grading Reclass, Shipping, dan Laporan Harian Tembakau",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
