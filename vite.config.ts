@@ -4,8 +4,13 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
+const rawBase = process.env.VITE_BASE_PATH || '/';
+const normalizedBase = rawBase.startsWith('/') ? rawBase : `/${rawBase}`;
+const base = normalizedBase.endsWith('/') ? normalizedBase : `${normalizedBase}/`;
+
 export default defineConfig(() => {
   return {
+    base,
     plugins: [
       react(),
       tailwindcss(),
@@ -19,7 +24,7 @@ export default defineConfig(() => {
           'pwa-maskable-512x512.png',
         ],
         manifest: {
-          id: '/',
+          id: base,
           name: 'ISCS Stock Control & Warehouse',
           short_name: 'ISCS Engine',
           description: 'Sistem Manajemen Timbang Buying, Grading Reclass, Shipping, dan Laporan Harian Tembakau',
@@ -28,23 +33,23 @@ export default defineConfig(() => {
           display: 'standalone',
           orientation: 'any',
           lang: 'id',
-          start_url: '/',
-          scope: '/',
+          start_url: base,
+          scope: base,
           icons: [
             {
-              src: '/pwa-192x192.png',
+              src: `${base}pwa-192x192.png`,
               sizes: '192x192',
               type: 'image/png',
               purpose: 'any',
             },
             {
-              src: '/pwa-512x512.png',
+              src: `${base}pwa-512x512.png`,
               sizes: '512x512',
               type: 'image/png',
               purpose: 'any',
             },
             {
-              src: '/pwa-maskable-512x512.png',
+              src: `${base}pwa-maskable-512x512.png`,
               sizes: '512x512',
               type: 'image/png',
               purpose: 'maskable',
@@ -54,7 +59,7 @@ export default defineConfig(() => {
         workbox: {
           globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2}'],
           maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
-          navigateFallback: '/index.html',
+          navigateFallback: `${base}index.html`,
           navigateFallbackDenylist: [/^\/api\//],
         },
         devOptions: {

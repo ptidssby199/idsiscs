@@ -1,61 +1,40 @@
 ====================================================================
-PANDUAN MENGUBAH / INSTALL ISCS ENGINE DI ANDROID (.APK & PWA)
+PANDUAN DEPLOY PWA DI GITHUB PAGES & INSTALL DI ANDROID
 ====================================================================
 Semua file asli untuk PC/Windows (server.ts, JALANKAN_APLIKASI.bat,
 JALANKAN_KIOSK.bat, BUILD_DAN_START.bat, data/) TETAP UTUH dan TIDAK
 DIUBAH agar penggunaan di laptop/PC tetap berjalan normal.
 
 --------------------------------------------------------------------
-KENAPA CHROME ANDROID MENAMPILKAN "APLIKASI INI TIDAK DAPAT DIINSTALL"?
+CARA DEPLOY PWA OTOMATIS KE GITHUB PAGES (GRATIS & HTTPS PUBLIK)
 --------------------------------------------------------------------
-1. Jika Anda membuka link preview AI Studio (ais-dev-...run.app atau
-   ais-pre-...run.app), link tersebut terkunci di balik login akun
-   Google. Saat Chrome Android hendak membuat WebAPK, server pembuat
-   APK Google mengunduh manifest/ikon TANPA cookie login sehingga
-   ditolak oleh halaman login Google -> muncul pesan:
-   "Aplikasi ini tidak dapat diinstall".
-2. Jika Anda membuka lewat Wi-Fi lokal menggunakan HTTP biasa
-   (contoh: http://192.168.1.10:3000), Chrome Android juga memblokir
-   instalasi PWA karena bukan HTTPS.
+Workflow sudah disiapkan di: .github/workflows/deploy-pwa.yml
 
-SOLUSI AGAR BISA DIINSTALL DI HP ANDROID:
-
---------------------------------------------------------------------
-CARA 1 (PALING DISARANKAN): JADIKAN FILE .APK ASLI (CAPACITOR)
---------------------------------------------------------------------
-Project Android native sudah disiapkan di folder "android/" lengkap
-dengan konfigurasi "capacitor.config.ts".
-
-Opsi A — Compile di PC Windows (Jika ada Java JDK & Android Studio):
-1. Klik dua kali file: BUILD_APK_ANDROID.bat
-2. Tunggu proses selesai. File APK akan muncul di:
-   -> ISCS-Engine-Android.apk
-   (atau di android\app\build\outputs\apk\debug\app-debug.apk)
-
-Opsi B — Compile Otomatis Gratis via GitHub (Tanpa Install Android Studio):
-1. Upload folder aplikasi ini ke repository GitHub Anda.
-2. Buka tab "Actions" -> workflow "Build Android APK" sudah tersedia
-   otomatis (.github/workflows/build-apk.yml).
-3. Klik "Run workflow" (atau otomatis jalan saat push), tunggu ~2 menit.
-4. Download file artifact "ISCS-Engine-Android-APK" (berisi app-debug.apk).
-5. Pindahkan ke HP Android dan install seperti biasa.
+Langkah-langkah di GitHub:
+1. Buat repository baru di GitHub (disarankan Public agar GitHub Pages
+   gratis, atau Private jika memakai GitHub Pro/Team).
+2. Upload seluruh isi folder project ini ke repository (branch main/master).
+3. Di halaman repository GitHub, masuk ke:
+   Settings -> Pages -> Build and deployment -> Source: pilih "GitHub Actions".
+4. Workflow "Deploy PWA to GitHub Pages" akan berjalan otomatis
+   (atau jalankan manual lewat tab Actions -> Run workflow).
+5. Setelah selesai (status hijau), akan muncul link HTTPS publik, contoh:
+   https://<username>.github.io/<nama-repo>/
 
 --------------------------------------------------------------------
-CARA 2: INSTALL PWA CHROME ANDROID (TANPA .APK)
+CARA INSTALL DI HP ANDROID (TANPA ERROR)
 --------------------------------------------------------------------
-Agar Chrome Android bisa install PWA tanpa error "Aplikasi ini tidak
-dapat diinstall", aplikasi harus dibuka lewat URL HTTPS publik yang
-TIDAK terkunci login proxy:
-- Deploy folder hasil build ("dist/") ke hosting HTTPS gratis seperti
-  Vercel / Netlify / Cloudflare Pages / Firebase Hosting, ATAU
-- Jalankan di PC lalu buat tunnel HTTPS sementara (misal: Cloudflare
-  Tunnel `cloudflared tunnel --url http://localhost:3000`).
-- Setelah dibuka di Chrome Android lewat link HTTPS publik tersebut,
-  ketuk tombol "Install di Android / HP" atau menu titik tiga Chrome ->
-  "Install aplikasi". Aplikasi akan terpasang penuh dan jalan offline.
+1. Buka link GitHub Pages (https://<username>.github.io/<nama-repo>/)
+   di Google Chrome HP Android.
+2. Ketuk tombol "Install di Android / HP" (atau menu titik tiga Chrome ->
+   "Tambahkan ke Layar utama" / "Install aplikasi").
+3. Aplikasi akan terpasang dengan ikon ISCS Engine dan berjalan
+   100% OFFLINE di HP Android.
 
-Catatan Penyimpanan di Android:
-- Seluruh data timbang, buying, grading, buat bale, dan shipping
-  tersimpan langsung di memori internal aplikasi HP (offline penuh).
-- Fitur Export Excel & Sinkronisasi JSON tetap dapat digunakan.
+--------------------------------------------------------------------
+OPSI TAMBAHAN: BUILD .APK LOKAL DI WINDOWS (CAPACITOR)
+--------------------------------------------------------------------
+Jika suatu saat tetap ingin membuat file .apk lokal di PC Windows yang
+terpasang Java JDK & Android Studio, tetap tersedia skrip:
+-> BUILD_APK_ANDROID.bat
 ====================================================================
